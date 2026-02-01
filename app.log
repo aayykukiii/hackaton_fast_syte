@@ -1,0 +1,274 @@
+2026-02-01 15:05:37,615 - app.main - INFO - ✅ Загружен роутер: images
+2026-02-01 15:05:38,737 - app.main - INFO - ✅ Загружен роутер: analysis
+2026-02-01 15:05:38,740 - app.main - INFO - ✅ Загружен роутер: anomalies
+2026-02-01 15:05:38,741 - app.main - WARNING - ⚠️ Не удалось импортировать модуль app.api.statistics: No module named 'app.api.statistics'
+2026-02-01 15:05:38,742 - app.main - INFO - 🚀 Запуск Geo Anomaly Detector...
+2026-02-01 15:05:38,742 - app.main - INFO - 📁 Создание структуры директорий...
+2026-02-01 15:05:38,743 - app.main - INFO - Создана директория: app/static
+2026-02-01 15:05:38,743 - app.main - INFO - Создана директория: app/static/css
+2026-02-01 15:05:38,749 - app.main - INFO - Создана директория: app/static/js
+2026-02-01 15:05:38,749 - app.main - INFO - Создана директория: app/static/images
+2026-02-01 15:05:38,750 - app.main - INFO - Создана директория: app/uploads
+2026-02-01 15:05:38,750 - app.main - INFO - Создана директория: app/uploads/raw
+2026-02-01 15:05:38,751 - app.main - INFO - Создана директория: app/uploads/processed
+2026-02-01 15:05:38,751 - app.main - INFO - Создана директория: app/logs
+2026-02-01 15:05:38,751 - app.main - INFO - Создана директория: data/raw
+2026-02-01 15:05:38,752 - app.main - INFO - Создана директория: data/processed
+2026-02-01 15:05:38,752 - app.main - INFO - Создана директория: data/exports
+2026-02-01 15:05:38,752 - app.main - INFO - Создана директория: temp
+2026-02-01 15:05:38,753 - app.main - INFO - Создан CSS файл
+2026-02-01 15:05:38,753 - app.main - INFO - Создан JS файл
+2026-02-01 15:05:38,754 - app.main - ERROR - ❌ Ошибка инициализации БД: No module named 'app.core.database'
+2026-02-01 15:05:38,754 - app.main - INFO - ⚡ Инициализация кэша...
+2026-02-01 15:06:04,151 - app.main - INFO - 🛑 Завершение работы приложения...
+2026-02-01 15:07:28,587 - app.main - INFO - ✅ Загружен роутер: images
+2026-02-01 15:07:34,447 - app.main - INFO - ✅ Загружен роутер: analysis
+2026-02-01 15:07:34,451 - app.main - INFO - ✅ Загружен роутер: anomalies
+2026-02-01 15:07:34,451 - app.main - WARNING - ⚠️ Не удалось импортировать модуль app.api.statistics: No module named 'app.api.statistics'
+2026-02-01 15:07:34,452 - app.main - INFO - 🚀 Запуск Geo Anomaly Detector...
+2026-02-01 15:07:34,452 - app.main - INFO - 📁 Создание структуры директорий...
+2026-02-01 15:07:34,453 - app.main - INFO - Создана директория: app/static
+2026-02-01 15:07:34,453 - app.main - INFO - Создана директория: app/static/css
+2026-02-01 15:07:34,453 - app.main - INFO - Создана директория: app/static/js
+2026-02-01 15:07:34,454 - app.main - INFO - Создана директория: app/static/images
+2026-02-01 15:07:34,454 - app.main - INFO - Создана директория: app/uploads
+2026-02-01 15:07:34,454 - app.main - INFO - Создана директория: app/uploads/raw
+2026-02-01 15:07:34,455 - app.main - INFO - Создана директория: app/uploads/processed
+2026-02-01 15:07:34,455 - app.main - INFO - Создана директория: app/logs
+2026-02-01 15:07:34,455 - app.main - INFO - Создана директория: data/raw
+2026-02-01 15:07:34,455 - app.main - INFO - Создана директория: data/processed
+2026-02-01 15:07:34,455 - app.main - INFO - Создана директория: data/exports
+2026-02-01 15:07:34,456 - app.main - INFO - Создана директория: temp
+2026-02-01 15:07:34,458 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-02-01 15:07:34,458 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("satellite_images")
+2026-02-01 15:07:34,458 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-02-01 15:07:34,459 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("anomalies")
+2026-02-01 15:07:34,459 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-02-01 15:07:34,460 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-02-01 15:07:34,460 - app.main - INFO - ✅ База данных инициализирована
+2026-02-01 15:07:34,460 - app.main - INFO - ⚡ Инициализация кэша...
+2026-02-01 15:08:29,138 - app.main - INFO - 🛑 Завершение работы приложения...
+2026-02-01 15:08:41,633 - __main__ - INFO - ✅ Загружен роутер: images
+2026-02-01 15:08:42,637 - __main__ - INFO - ✅ Загружен роутер: analysis
+2026-02-01 15:08:42,640 - __main__ - INFO - ✅ Загружен роутер: anomalies
+2026-02-01 15:08:42,641 - __main__ - WARNING - ⚠️ Не удалось импортировать модуль app.api.statistics: No module named 'app.api.statistics'
+2026-02-01 15:08:43,344 - __mp_main__ - INFO - ✅ Загружен роутер: images
+2026-02-01 15:08:44,269 - __mp_main__ - INFO - ✅ Загружен роутер: analysis
+2026-02-01 15:08:44,273 - __mp_main__ - INFO - ✅ Загружен роутер: anomalies
+2026-02-01 15:08:44,273 - __mp_main__ - WARNING - ⚠️ Не удалось импортировать модуль app.api.statistics: No module named 'app.api.statistics'
+2026-02-01 15:08:44,299 - app.main - INFO - ✅ Загружен роутер: images
+2026-02-01 15:08:44,301 - app.main - INFO - ✅ Загружен роутер: analysis
+2026-02-01 15:08:44,303 - app.main - INFO - ✅ Загружен роутер: anomalies
+2026-02-01 15:08:44,303 - app.main - WARNING - ⚠️ Не удалось импортировать модуль app.api.statistics: No module named 'app.api.statistics'
+2026-02-01 15:08:44,304 - app.main - INFO - 🚀 Запуск Geo Anomaly Detector...
+2026-02-01 15:08:44,304 - app.main - INFO - 📁 Создание структуры директорий...
+2026-02-01 15:08:44,304 - app.main - INFO - Создана директория: app/static
+2026-02-01 15:08:44,304 - app.main - INFO - Создана директория: app/static/css
+2026-02-01 15:08:44,305 - app.main - INFO - Создана директория: app/static/js
+2026-02-01 15:08:44,305 - app.main - INFO - Создана директория: app/static/images
+2026-02-01 15:08:44,305 - app.main - INFO - Создана директория: app/uploads
+2026-02-01 15:08:44,305 - app.main - INFO - Создана директория: app/uploads/raw
+2026-02-01 15:08:44,306 - app.main - INFO - Создана директория: app/uploads/processed
+2026-02-01 15:08:44,306 - app.main - INFO - Создана директория: app/logs
+2026-02-01 15:08:44,306 - app.main - INFO - Создана директория: data/raw
+2026-02-01 15:08:44,307 - app.main - INFO - Создана директория: data/processed
+2026-02-01 15:08:44,307 - app.main - INFO - Создана директория: data/exports
+2026-02-01 15:08:44,307 - app.main - INFO - Создана директория: temp
+2026-02-01 15:08:44,308 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-02-01 15:08:44,308 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("satellite_images")
+2026-02-01 15:08:44,308 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-02-01 15:08:44,309 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("anomalies")
+2026-02-01 15:08:44,309 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-02-01 15:08:44,310 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-02-01 15:08:44,310 - app.main - INFO - ✅ База данных инициализирована
+2026-02-01 15:08:44,310 - app.main - INFO - ⚡ Инициализация кэша...
+2026-02-01 15:26:49,960 - app.main - INFO - 🛑 Завершение работы приложения...
+2026-02-01 15:35:36,885 - __main__ - INFO - ✅ Загружен роутер: images
+2026-02-01 15:35:39,606 - __main__ - INFO - ✅ Загружен роутер: analysis
+2026-02-01 15:35:39,609 - __main__ - INFO - ✅ Загружен роутер: anomalies
+2026-02-01 15:35:39,609 - __main__ - WARNING - ⚠️ Не удалось импортировать модуль app.api.statistics: No module named 'app.api.statistics'
+2026-02-01 15:35:40,486 - __mp_main__ - INFO - ✅ Загружен роутер: images
+2026-02-01 15:35:41,839 - __mp_main__ - INFO - ✅ Загружен роутер: analysis
+2026-02-01 15:35:41,842 - __mp_main__ - INFO - ✅ Загружен роутер: anomalies
+2026-02-01 15:35:41,842 - __mp_main__ - WARNING - ⚠️ Не удалось импортировать модуль app.api.statistics: No module named 'app.api.statistics'
+2026-02-01 15:35:41,869 - app.main - INFO - ✅ Загружен роутер: images
+2026-02-01 15:35:41,871 - app.main - INFO - ✅ Загружен роутер: analysis
+2026-02-01 15:35:41,873 - app.main - INFO - ✅ Загружен роутер: anomalies
+2026-02-01 15:35:41,873 - app.main - WARNING - ⚠️ Не удалось импортировать модуль app.api.statistics: No module named 'app.api.statistics'
+2026-02-01 15:35:41,874 - app.main - INFO - 🚀 Запуск Geo Anomaly Detector...
+2026-02-01 15:35:41,874 - app.main - INFO - 📁 Создание структуры директорий...
+2026-02-01 15:35:41,874 - app.main - INFO - Создана директория: app/static
+2026-02-01 15:35:41,875 - app.main - INFO - Создана директория: app/static/css
+2026-02-01 15:35:41,875 - app.main - INFO - Создана директория: app/static/js
+2026-02-01 15:35:41,875 - app.main - INFO - Создана директория: app/static/images
+2026-02-01 15:35:41,876 - app.main - INFO - Создана директория: app/uploads
+2026-02-01 15:35:41,876 - app.main - INFO - Создана директория: app/uploads/raw
+2026-02-01 15:35:41,876 - app.main - INFO - Создана директория: app/uploads/processed
+2026-02-01 15:35:41,876 - app.main - INFO - Создана директория: app/logs
+2026-02-01 15:35:41,877 - app.main - INFO - Создана директория: data/raw
+2026-02-01 15:35:41,877 - app.main - INFO - Создана директория: data/processed
+2026-02-01 15:35:41,877 - app.main - INFO - Создана директория: data/exports
+2026-02-01 15:35:41,877 - app.main - INFO - Создана директория: temp
+2026-02-01 15:35:41,878 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-02-01 15:35:41,879 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("satellite_images")
+2026-02-01 15:35:41,879 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-02-01 15:35:41,880 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("anomalies")
+2026-02-01 15:35:41,880 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-02-01 15:35:41,880 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-02-01 15:35:41,880 - app.main - INFO - ✅ База данных инициализирована
+2026-02-01 15:35:41,881 - app.main - INFO - ⚡ Инициализация кэша...
+2026-02-01 15:47:09,758 - __main__ - INFO - ✅ Загружен роутер: images
+2026-02-01 15:47:11,118 - __main__ - INFO - ✅ Загружен роутер: analysis
+2026-02-01 15:47:11,122 - __main__ - INFO - ✅ Загружен роутер: anomalies
+2026-02-01 15:47:11,122 - __main__ - WARNING - ⚠️ Не удалось импортировать модуль app.api.statistics: No module named 'app.api.statistics'
+2026-02-01 15:47:11,953 - __mp_main__ - INFO - ✅ Загружен роутер: images
+2026-02-01 15:47:13,228 - __mp_main__ - INFO - ✅ Загружен роутер: analysis
+2026-02-01 15:47:13,232 - __mp_main__ - INFO - ✅ Загружен роутер: anomalies
+2026-02-01 15:47:13,232 - __mp_main__ - WARNING - ⚠️ Не удалось импортировать модуль app.api.statistics: No module named 'app.api.statistics'
+2026-02-01 15:47:13,261 - app.main - INFO - ✅ Загружен роутер: images
+2026-02-01 15:47:13,263 - app.main - INFO - ✅ Загружен роутер: analysis
+2026-02-01 15:47:13,264 - app.main - INFO - ✅ Загружен роутер: anomalies
+2026-02-01 15:47:13,264 - app.main - WARNING - ⚠️ Не удалось импортировать модуль app.api.statistics: No module named 'app.api.statistics'
+2026-02-01 15:47:13,265 - app.main - INFO - 🚀 Запуск Geo Anomaly Detector...
+2026-02-01 15:47:13,265 - app.main - INFO - 📁 Создание структуры директорий...
+2026-02-01 15:47:13,265 - app.main - INFO - Создана директория: app/static
+2026-02-01 15:47:13,266 - app.main - INFO - Создана директория: app/static/css
+2026-02-01 15:47:13,266 - app.main - INFO - Создана директория: app/static/js
+2026-02-01 15:47:13,266 - app.main - INFO - Создана директория: app/static/images
+2026-02-01 15:47:13,267 - app.main - INFO - Создана директория: app/uploads
+2026-02-01 15:47:13,267 - app.main - INFO - Создана директория: app/uploads/raw
+2026-02-01 15:47:13,267 - app.main - INFO - Создана директория: app/uploads/processed
+2026-02-01 15:47:13,267 - app.main - INFO - Создана директория: app/logs
+2026-02-01 15:47:13,268 - app.main - INFO - Создана директория: data/raw
+2026-02-01 15:47:13,268 - app.main - INFO - Создана директория: data/processed
+2026-02-01 15:47:13,268 - app.main - INFO - Создана директория: data/exports
+2026-02-01 15:47:13,268 - app.main - INFO - Создана директория: temp
+2026-02-01 15:47:13,269 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-02-01 15:47:13,269 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("satellite_images")
+2026-02-01 15:47:13,270 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-02-01 15:47:13,270 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("anomalies")
+2026-02-01 15:47:13,270 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-02-01 15:47:13,271 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-02-01 15:47:13,271 - app.main - INFO - ✅ База данных инициализирована
+2026-02-01 15:47:13,271 - app.main - INFO - ⚡ Инициализация кэша...
+2026-02-01 15:49:56,313 - app.main - INFO - ✅ Загружен роутер: images
+2026-02-01 15:49:57,542 - app.main - INFO - ✅ Загружен роутер: analysis
+2026-02-01 15:49:57,546 - app.main - INFO - ✅ Загружен роутер: anomalies
+2026-02-01 15:49:57,546 - app.main - WARNING - ⚠️ Не удалось импортировать модуль app.api.statistics: No module named 'app.api.statistics'
+2026-02-01 15:49:57,547 - app.main - INFO - 🚀 Запуск Geo Anomaly Detector...
+2026-02-01 15:49:57,547 - app.main - INFO - 📁 Создание структуры директорий...
+2026-02-01 15:49:57,548 - app.main - INFO - Создана директория: app/static
+2026-02-01 15:49:57,548 - app.main - INFO - Создана директория: app/static/css
+2026-02-01 15:49:57,548 - app.main - INFO - Создана директория: app/static/js
+2026-02-01 15:49:57,548 - app.main - INFO - Создана директория: app/static/images
+2026-02-01 15:49:57,549 - app.main - INFO - Создана директория: app/uploads
+2026-02-01 15:49:57,549 - app.main - INFO - Создана директория: app/uploads/raw
+2026-02-01 15:49:57,549 - app.main - INFO - Создана директория: app/uploads/processed
+2026-02-01 15:49:57,549 - app.main - INFO - Создана директория: app/logs
+2026-02-01 15:49:57,550 - app.main - INFO - Создана директория: data/raw
+2026-02-01 15:49:57,550 - app.main - INFO - Создана директория: data/processed
+2026-02-01 15:49:57,550 - app.main - INFO - Создана директория: data/exports
+2026-02-01 15:49:57,551 - app.main - INFO - Создана директория: temp
+2026-02-01 15:49:57,551 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-02-01 15:49:57,552 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("satellite_images")
+2026-02-01 15:49:57,552 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-02-01 15:49:57,553 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("anomalies")
+2026-02-01 15:49:57,553 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-02-01 15:49:57,553 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-02-01 15:49:57,554 - app.main - INFO - ✅ База данных инициализирована
+2026-02-01 15:49:57,554 - app.main - INFO - ⚡ Инициализация кэша...
+2026-02-01 16:14:39,478 - app.main - INFO - ✅ Загружен роутер: images
+2026-02-01 16:14:40,741 - app.main - INFO - ✅ Загружен роутер: analysis
+2026-02-01 16:14:40,744 - app.main - INFO - ✅ Загружен роутер: anomalies
+2026-02-01 16:14:40,744 - app.main - WARNING - ⚠️ Не удалось импортировать модуль app.api.statistics: No module named 'app.api.statistics'
+2026-02-01 16:14:40,745 - app.main - INFO - 🚀 Запуск Geo Anomaly Detector...
+2026-02-01 16:14:40,745 - app.main - INFO - 📁 Создание структуры директорий...
+2026-02-01 16:14:40,745 - app.main - INFO - Создана директория: app/static
+2026-02-01 16:14:40,746 - app.main - INFO - Создана директория: app/static/css
+2026-02-01 16:14:40,746 - app.main - INFO - Создана директория: app/static/js
+2026-02-01 16:14:40,746 - app.main - INFO - Создана директория: app/static/images
+2026-02-01 16:14:40,746 - app.main - INFO - Создана директория: app/uploads
+2026-02-01 16:14:40,746 - app.main - INFO - Создана директория: app/uploads/raw
+2026-02-01 16:14:40,747 - app.main - INFO - Создана директория: app/uploads/processed
+2026-02-01 16:14:40,747 - app.main - INFO - Создана директория: app/logs
+2026-02-01 16:14:40,747 - app.main - INFO - Создана директория: data/raw
+2026-02-01 16:14:40,747 - app.main - INFO - Создана директория: data/processed
+2026-02-01 16:14:40,748 - app.main - INFO - Создана директория: data/exports
+2026-02-01 16:14:40,748 - app.main - INFO - Создана директория: temp
+2026-02-01 16:14:40,749 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-02-01 16:14:40,749 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("satellite_images")
+2026-02-01 16:14:40,749 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-02-01 16:14:40,750 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("anomalies")
+2026-02-01 16:14:40,750 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-02-01 16:14:40,751 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-02-01 16:14:40,751 - app.main - INFO - ✅ База данных инициализирована
+2026-02-01 16:14:40,751 - app.main - INFO - ⚡ Инициализация кэша...
+2026-02-01 16:22:24,134 - app.main - INFO - 🛑 Завершение работы приложения...
+2026-02-01 23:43:11,820 - app.main - INFO - ✅ Загружен роутер: images
+2026-02-01 23:43:50,816 - app.main - WARNING - ⚠️ Не удалось импортировать модуль app.api.analysis: No module named 'pyproj'
+2026-02-01 23:43:50,819 - app.main - INFO - ✅ Загружен роутер: anomalies
+2026-02-01 23:43:50,819 - app.main - WARNING - ⚠️ Не удалось импортировать модуль app.api.statistics: No module named 'app.api.statistics'
+2026-02-01 23:43:50,819 - app.main - INFO - 🚀 Запуск Geo Anomaly Detector...
+2026-02-01 23:43:50,819 - app.main - INFO - 📁 Создание структуры директорий...
+2026-02-01 23:43:50,820 - app.main - INFO - Создана директория: app/static
+2026-02-01 23:43:50,820 - app.main - INFO - Создана директория: app/static/css
+2026-02-01 23:43:50,820 - app.main - INFO - Создана директория: app/static/js
+2026-02-01 23:43:50,820 - app.main - INFO - Создана директория: app/static/images
+2026-02-01 23:43:50,820 - app.main - INFO - Создана директория: app/uploads
+2026-02-01 23:43:50,820 - app.main - INFO - Создана директория: app/uploads/raw
+2026-02-01 23:43:50,820 - app.main - INFO - Создана директория: app/uploads/processed
+2026-02-01 23:43:50,820 - app.main - INFO - Создана директория: app/logs
+2026-02-01 23:43:50,820 - app.main - INFO - Создана директория: data/raw
+2026-02-01 23:43:50,820 - app.main - INFO - Создана директория: data/processed
+2026-02-01 23:43:50,820 - app.main - INFO - Создана директория: data/exports
+2026-02-01 23:43:50,820 - app.main - INFO - Создана директория: temp
+2026-02-01 23:43:50,822 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-02-01 23:43:50,822 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("satellite_images")
+2026-02-01 23:43:50,822 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-02-01 23:43:50,823 - sqlalchemy.engine.Engine - INFO - PRAGMA temp.table_info("satellite_images")
+2026-02-01 23:43:50,823 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-02-01 23:43:50,823 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("anomalies")
+2026-02-01 23:43:50,823 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-02-01 23:43:50,824 - sqlalchemy.engine.Engine - INFO - PRAGMA temp.table_info("anomalies")
+2026-02-01 23:43:50,824 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-02-01 23:43:50,825 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE satellite_images (
+	id INTEGER NOT NULL, 
+	filename VARCHAR NOT NULL, 
+	filepath VARCHAR NOT NULL, 
+	date_captured DATETIME NOT NULL, 
+	coordinates TEXT, 
+	resolution FLOAT, 
+	width INTEGER, 
+	height INTEGER, 
+	created_at DATETIME DEFAULT CURRENT_TIMESTAMP, 
+	PRIMARY KEY (id)
+)
+
+
+2026-02-01 23:43:50,825 - sqlalchemy.engine.Engine - INFO - [no key 0.00010s] ()
+2026-02-01 23:43:50,825 - sqlalchemy.engine.Engine - INFO - CREATE INDEX ix_satellite_images_id ON satellite_images (id)
+2026-02-01 23:43:50,825 - sqlalchemy.engine.Engine - INFO - [no key 0.00006s] ()
+2026-02-01 23:43:50,826 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE anomalies (
+	id INTEGER NOT NULL, 
+	image_id INTEGER NOT NULL, 
+	anomaly_type VARCHAR(50) NOT NULL, 
+	confidence FLOAT NOT NULL, 
+	latitude FLOAT NOT NULL, 
+	longitude FLOAT NOT NULL, 
+	bbox TEXT, 
+	area FLOAT, 
+	description TEXT, 
+	detected_at DATETIME DEFAULT CURRENT_TIMESTAMP, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(image_id) REFERENCES satellite_images (id)
+)
+
+
+2026-02-01 23:43:50,826 - sqlalchemy.engine.Engine - INFO - [no key 0.00008s] ()
+2026-02-01 23:43:50,827 - sqlalchemy.engine.Engine - INFO - CREATE INDEX ix_anomalies_id ON anomalies (id)
+2026-02-01 23:43:50,827 - sqlalchemy.engine.Engine - INFO - [no key 0.00005s] ()
+2026-02-01 23:43:50,827 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-02-01 23:43:50,828 - app.main - INFO - ✅ База данных инициализирована
+2026-02-01 23:43:50,828 - app.main - INFO - ⚡ Инициализация кэша...

@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEO-SAT | Спутниковая карта Земли в реальном времени</title>
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Exo+2:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- AOS Animation -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/neon-effects.css">
+    <link rel="stylesheet" href="style.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛰️</text></svg>">
+</head>
+<body class="dark-theme">
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="satellite-loader">
+                <div class="satellite">
+                    <i class="fas fa-satellite"></i>
+                </div>
+                <div class="orbit"></div>
+            </div>
+            <div class="loading-text">
+                <h2>ИНИЦИАЛИЗАЦИЯ NEO-SAT</h2>
+                <div class="progress-container">
+                    <div class="progress-bar" id="loadingProgress"></div>
+                </div>
+                <div class="loading-stats">
+                    <span id="loadingStatus">Загрузка спутниковых данных...</span>
+                    <span id="loadingPercent">0%</span>
+                </div>
+                <div class="loading-details">
+                    <div class="loading-item">
+                        <i class="fas fa-satellite-dish"></i>
+                        <span>Подключение к спутникам: <span id="satConnections">0/12</span></span>
+                    </div>
+                    <div class="loading-item">
+                        <i class="fas fa-database"></i>
+                        <span>Загрузка тайлов: <span id="tileProgress">0%</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <header class="main-header">
+            <div class="header-top">
+                <div class="logo-container">
+                    <div class="logo-icon">
+                        <i class="fas fa-globe-americas"></i>
+                        <div class="pulse-ring"></div>
+                        <div class="pulse-ring delay-1"></div>
+                        <div class="pulse-ring delay-2"></div>
+                    </div>
+                    <div class="logo-text">
+                        <h1 class="neon-text">NEO<span class="highlight">SAT</span></h1>
+                        <p class="tagline">Спутниковый мониторинг Земли в реальном времени</p>
+                    </div>
+                </div>
+                
+                <div class="header-controls">
+                    <!-- System Status -->
+                    <div class="status-panel">
+                        <div class="status-item online">
+                            <div class="status-indicator"></div>
+                            <span>СИСТЕМА АКТИВНА</span>
+                        </div>
+                        <div class="status-item">
+                            <i class="fas fa-satellite"></i>
+                            <span>СПУТНИКИ: <strong id="activeSats">12</strong>/24</span>
+                        </div>
+                        <div class="status-item">
+                            <i class="fas fa-signal"></i>
+                            <span>СИГНАЛ: <strong id="signalStrength">98%</strong></span>
+                        </div>
+                    </div>
+                    
+                    <!-- Time and Date -->
+                    <div class="datetime-panel">
+                        <div class="time-display" id="currentTime">--:--:--</div>
+                        <div class="date-display" id="currentDate">--- --- --, ----</div>
+                        <div class="utc-time">UTC+3</div>
+                    </div>
+                    
+                    <!-- Quick Actions -->
+                    <div class="quick-actions">
+                        <button class="btn-icon neon-btn" id="fullscreenToggle" title="Полный экран">
+                            <i class="fas fa-expand"></i>
+                        </button>
+                        <button class="btn-icon neon-btn" id="recordToggle" title="Запись сессии">
+                            <i class="fas fa-circle"></i>
+                        </button>
+                        <button class="btn-icon neon-btn" id="screenshotBtn" title="Снимок экрана">
+                            <i class="fas fa-camera"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <nav class="main-nav">
+                <div class="nav-tabs">
+                    <button class="nav-tab active" data-view="satellite">
+                        <i class="fas fa-satellite"></i>
+                        <span>Спутниковый вид</span>
+                    </button>
+                    <button class="nav-tab" data-view="topographic">
+                        <i class="fas fa-mountain"></i>
+                        <span>Топография</span>
+                    </button>
+                    <button class="nav-tab" data-view="weather">
+                        <i class="fas fa-cloud-sun"></i>
+                        <span>Погода</span>
+                    </button>
+                    <button class="nav-tab" data-view="night">
+                        <i class="fas fa-moon"></i>
+                        <span>Ночной вид</span>
+                    </button>
+                    <button class="nav-tab" data-view="thermal">
+                        <i class="fas fa-fire"></i>
+                        <span>Тепловая карта</span>
+                    </button>
+                </div>
+                
+                <div class="nav-search">
+                    <div class="search-container">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchLocation" placeholder="Поиск города, координат или объекта...">
+                        <div class="search-results" id="searchResults"></div>
+                    </div>
+                    <button class="btn-primary" id="locateMe">
+                        <i class="fas fa-location-crosshairs"></i>
+                        <span>Моё местоположение</span>
+                    </button>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Left Sidebar -->
+            <aside class="sidebar left-sidebar">
+                <!-- Map Layers Control -->
+                <section class="sidebar-section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-layer-group"></i> СЛОИ КАРТЫ</h3>
+                        <button class="section-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="section-content">
+                        <div class="layers-control">
+                            <div class="layer-item active">
+                                <label class="switch">
+                                    <input type="checkbox" checked data-layer="satellite">
+                                    <span class="slider"></span>
+                                </label>
+                                <div class="layer-info">
+                                    <i class="fas fa-satellite"></i>
+                                    <span>Спутниковый слой</span>
+                                </div>
+                                <div class="layer-badge highres">
+                                    <i class="fas fa-star"></i>
+                                    <span>HD</span>
+                                </div>
+                            </div>
+                            
+                            <div class="layer-item">
+                                <label class="switch">
+                                    <input type="checkbox" data-layer="labels">
+                                    <span class="slider"></span>
+                                </label>
+                                <div class="layer-info">
+                                    <i class="fas fa-tag"></i>
+                                    <span>Подписи</span>
+                                </div>
+                            </div>
+                            
+                            <div class="layer-item">
+                                <label class="switch">
+                                    <input type="checkbox" data-layer="roads">
+                                    <span class="slider"></span>
+                                </label>
+                                <div class="layer-info">
+                                    <i class="fas fa-road"></i>
+                                    <span>Дороги</span>
+                                </div>
+                            </div>
+                            
+                            <div class="layer-item">
+                                <label class="switch">
+                                    <input type="checkbox" data-layer="borders">
+                                    <span class="slider"></span>
+                                </label>
+                                <div class="layer-info">
+                                    <i class="fas fa-globe-europe"></i>
+                                    <span>Границы</span>
+                                </div>
+                            </div>
+                            
+                            <div class="layer-item">
+                                <label class="switch">
+                                    <input type="checkbox" data-layer="weather">
+                                    <span class="slider"></span>
+                                </label>
+                                <div class="layer-info">
+                                    <i class="fas fa-cloud"></i>
+                                    <span>Облака</span>
+                                </div>
+                            </div>
+                            
+                            <div class="layer-item">
+                                <label class="switch">
+                                    <input type="checkbox" data-layer="heatmap">
+                                    <span class="slider"></span>
+                                </label>
+                                <div class="layer-info">
+                                    <i class="fas fa-fire"></i>
+                                    <span>Тепловая карта</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Satellite Info -->
+                <section class="sidebar-section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-satellite-dish"></i> АКТИВНЫЕ СПУТНИКИ</h3>
+                        <button class="section-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="section-content">
+                        <div class="satellite-list">
+                            <div class="satellite-item active">
+                                <div class="satellite-icon">
+                                    <i class="fas fa-satellite"></i>
+                                    <div class="signal-indicator"></div>
+                                </div>
+                                <div class="satellite-info">
+                                    <h4>Landsat-9</h4>
+                                    <div class="satellite-meta">
+                                        <span class="meta-item">
+                                            <i class="fas fa-eye"></i>
+                                            30м/px
+                                        </span>
+                                        <span class="meta-item">
+                                            <i class="fas fa-clock"></i>
+                                            2 ч
+                                        </span>
+                                    </div>
+                                    <div class="satellite-position">
+                                        <i class="fas fa-location-dot"></i>
+                                        <span>55.7558° N, 37.6173° E</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="satellite-item">
+                                <div class="satellite-icon">
+                                    <i class="fas fa-satellite"></i>
+                                    <div class="signal-indicator"></div>
+                                </div>
+                                <div class="satellite-info">
+                                    <h4>Sentinel-2B</h4>
+                                    <div class="satellite-meta">
+                                        <span class="meta-item">
+                                            <i class="fas fa-eye"></i>
+                                            10м/px
+                                        </span>
+                                        <span class="meta-item">
+                                            <i class="fas fa-clock"></i>
+                                            5 ч
+                                        </span>
+                                    </div>
+                                    <div class="satellite-position">
+                                        <i class="fas fa-location-dot"></i>
+                                        <span>48.8566° N, 2.3522° E</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="satellite-item">
+                                <div class="satellite-icon">
+                                    <i class="fas fa-satellite"></i>
+                                    <div class="signal-indicator"></div>
+                                </div>
+                                <div class="satellite-info">
+                                    <h4>GOES-18</h4>
+                                    <div class="satellite-meta">
+                                        <span class="meta-item">
+                                            <i class="fas fa-eye"></i>
+                                            500м/px
+                                        </span>
+                                        <span class="meta-item">
+                                            <i class="fas fa-clock"></i>
+                                            Реальное время
+                                        </span>
+                                    </div>
+                                    <div class="satellite-position">
+                                        <i class="fas fa-location-dot"></i>
+                                        <span>0.0° N, -75.0° W</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button class="btn-outline full-width" id="addSatellite">
+                            <i class="fas fa-plus"></i>
+                            Добавить спутник
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Measurement Tools -->
+                <section class="sidebar-section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-ruler-combined"></i> ИНСТРУМЕНТЫ</h3>
+                        <button class="section-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="section-content">
+                        <div class="tools-grid">
+                            <button class="tool-btn active" data-tool="select">
+                                <i class="fas fa-mouse-pointer"></i>
+                                <span>Выбор</span>
+                            </button>
+                            <button class="tool-btn" data-tool="distance">
+                                <i class="fas fa-ruler"></i>
+                                <span>Расстояние</span>
+                            </button>
+                            <button class="tool-btn" data-tool="area">
+                                <i class="fas fa-draw-polygon"></i>
+                                <span>Площадь</span>
+                            </button>
+                            <button class="tool-btn" data-tool="circle">
+                                <i class="fas fa-circle"></i>
+                                <span>Круг</span>
+                            </button>
+                            <button class="tool-btn" data-tool="marker">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Метка</span>
+                            </button>
+                            <button class="tool-btn" data-tool="polygon">
+                                <i class="fas fa-shapes"></i>
+                                <span>Полигон</span>
+                            </button>
+                            <button class="tool-btn" data-tool="text">
+                                <i class="fas fa-font"></i>
+                                <span>Текст</span>
+                            </button>
+                            <button class="tool-btn" data-tool="clear">
+                                <i class="fas fa-trash"></i>
+                                <span>Очистить</span>
+                            </button>
+                        </div>
+                        
+                        <div class="measurement-results">
+                            <div class="measurement-item">
+                                <span class="label">Расстояние:</span>
+                                <span class="value" id="distanceValue">--</span>
+                            </div>
+                            <div class="measurement-item">
+                                <span class="label">Площадь:</span>
+                                <span class="value" id="areaValue">--</span>
+                            </div>
+                            <div class="measurement-item">
+                                <span class="label">Координаты:</span>
+                                <span class="value" id="coordinatesValue">--</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </aside>
+
+            <!-- Main Map Area -->
+            <div class="map-area">
+                <div class="map-container" id="mapContainer">
+                    <div id="map"></div>
+                    
+                    <!-- Map Controls -->
+                    <div class="map-controls">
+                        <div class="control-group">
+                            <button class="control-btn" id="zoomIn" title="Приблизить">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <button class="control-btn" id="zoomOut" title="Отдалить">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <button class="control-btn" id="resetView" title="Сбросить вид">
+                                <i class="fas fa-globe-americas"></i>
+                            </button>
+                            <div class="zoom-level-display">
+                                <i class="fas fa-search"></i>
+                                <span id="zoomLevel">5</span>
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <button class="control-btn" id="rotateLeft" title="Повернуть налево">
+                                <i class="fas fa-undo"></i>
+                            </button>
+                            <button class="control-btn" id="rotateRight" title="Повернуть направо">
+                                <i class="fas fa-redo"></i>
+                            </button>
+                            <button class="control-btn" id="compass" title="Компас">
+                                <i class="fas fa-compass"></i>
+                            </button>
+                            <div class="compass-display" id="compassValue">
+                                0°
+                            </div>
+                        </div>
+                        
+                        <div class="control-group">
+                            <button class="control-btn" id="toggle3D" title="3D вид">
+                                <i class="fas fa-cube"></i>
+                            </button>
+                            <button class="control-btn" id="toggleGrid" title="Сетка координат">
+                                <i class="fas fa-th"></i>
+                            </button>
+                            <button class="control-btn" id="toggleCoordinates" title="Координаты">
+                                <i class="fas fa-crosshairs"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Coordinates Display -->
+                    <div class="coordinates-display">
+                        <div class="coord-item">
+                            <span class="coord-label">ШИРОТА</span>
+                            <span class="coord-value" id="latitude">0.0000°</span>
+                        </div>
+                        <div class="coord-item">
+                            <span class="coord-label">ДОЛГОТА</span>
+                            <span class="coord-value" id="longitude">0.0000°</span>
+                        </div>
+                        <div class="coord-item">
+                            <span class="coord-label">ВЫСОТА</span>
+                            <span class="coord-value" id="altitude">0 м</span>
+                        </div>
+                        <div class="coord-item">
+                            <span class="coord-label">МАСШТАБ</span>
+                            <span class="coord-value" id="scale">1:100k</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Weather Overlay -->
+                    <div class="weather-overlay">
+                        <div class="weather-header">
+                            <i class="fas fa-cloud-sun"></i>
+                            <h4>ПОГОДА</h4>
+                            <button class="overlay-toggle">
+                                <i class="fas fa-chevron-up"></i>
+                            </button>
+                        </div>
+                        <div class="weather-content">
+                            <div class="weather-item">
+                                <div class="weather-icon">
+                                    <i class="wi wi-day-sunny"></i>
+                                </div>
+                                <div class="weather-info">
+                                    <div class="weather-temp">+24°C</div>
+                                    <div class="weather-desc">Солнечно</div>
+                                </div>
+                            </div>
+                            <div class="weather-details">
+                                <div class="detail-item">
+                                    <i class="fas fa-wind"></i>
+                                    <span>Ветер: 5 м/с</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-tint"></i>
+                                    <span>Влажность: 65%</span>
+                                </div>
+                                <div class="detail-item">
+                                    <i class="fas fa-cloud"></i>
+                                    <span>Облачность: 10%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Mini Globe -->
+                    <div class="mini-globe" id="miniGlobe">
+                        <div class="globe-container">
+                            <div class="globe"></div>
+                            <div class="globe-marker" id="globeMarker"></div>
+                        </div>
+                        <div class="globe-info">
+                            <div class="globe-coords" id="globeCoords">0°N, 0°E</div>
+                            <div class="globe-time" id="globeTime">12:00</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Sidebar -->
+            <aside class="sidebar right-sidebar">
+                <!-- Location Info -->
+                <section class="sidebar-section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-info-circle"></i> ИНФОРМАЦИЯ О МЕСТНОСТИ</h3>
+                        <button class="section-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="section-content">
+                        <div class="location-info">
+                            <div class="location-header">
+                                <h4 id="locationName">Выберите местность</h4>
+                                <div class="location-type" id="locationType">--</div>
+                            </div>
+                            
+                            <div class="location-details">
+                                <div class="detail-row">
+                                    <div class="detail-item">
+                                        <i class="fas fa-map"></i>
+                                        <div>
+                                            <span class="detail-label">Страна</span>
+                                            <span class="detail-value" id="country">--</span>
+                                        </div>
+                                    </div>
+                                    <div class="detail-item">
+                                        <i class="fas fa-city"></i>
+                                        <div>
+                                            <span class="detail-label">Регион</span>
+                                            <span class="detail-value" id="region">--</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="detail-row">
+                                    <div class="detail-item">
+                                        <i class="fas fa-mountain"></i>
+                                        <div>
+                                            <span class="detail-label">Высота</span>
+                                            <span class="detail-value" id="locationElevation">--</span>
+                                        </div>
+                                    </div>
+                                    <div class="detail-item">
+                                        <i class="fas fa-temperature-high"></i>
+                                        <div>
+                                            <span class="detail-label">Температура</span>
+                                            <span class="detail-value" id="locationTemp">--</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="detail-row">
+                                    <div class="detail-item">
+                                        <i class="fas fa-calendar-alt"></i>
+                                        <div>
+                                            <span class="detail-label">Часовой пояс</span>
+                                            <span class="detail-value" id="timezone">UTC+3</span>
+                                        </div>
+                                    </div>
+                                    <div class="detail-item">
+                                        <i class="fas fa-sun"></i>
+                                        <div>
+                                            <span class="detail-label">Восход/Закат</span>
+                                            <span class="detail-value" id="sunTimes">--</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="location-stats">
+                                <h5>СТАТИСТИКА</h5>
+                                <div class="stats-grid">
+                                    <div class="stat-item">
+                                        <div class="stat-value" id="population">--</div>
+                                        <div class="stat-label">Население</div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-value" id="area">--</div>
+                                        <div class="stat-label">Площадь</div>
+                                    </div>
+                                    <div class="stat-item">
+                                        <div class="stat-value" id="density">--</div>
+                                        <div class="stat-label">Плотность</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Bookmarks -->
+                <section class="sidebar-section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-bookmark"></i> ЗАКЛАДКИ</h3>
+                        <button class="section-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="section-content">
+                        <div class="bookmarks-list">
+                            <div class="bookmark-item">
+                                <div class="bookmark-icon">
+                                    <i class="fas fa-city"></i>
+                                </div>
+                                <div class="bookmark-info">
+                                    <h4>Москва, Россия</h4>
+                                    <div class="bookmark-coords">55.7558° N, 37.6173° E</div>
+                                </div>
+                                <button class="bookmark-action" title="Перейти">
+                                    <i class="fas fa-location-arrow"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="bookmark-item">
+                                <div class="bookmark-icon">
+                                    <i class="fas fa-mountain"></i>
+                                </div>
+                                <div class="bookmark-info">
+                                    <h4>Эверест</h4>
+                                    <div class="bookmark-coords">27.9881° N, 86.9250° E</div>
+                                </div>
+                                <button class="bookmark-action" title="Перейти">
+                                    <i class="fas fa-location-arrow"></i>
+                                </button>
+                            </div>
+                            
+                            <div class="bookmark-item">
+                                <div class="bookmark-icon">
+                                    <i class="fas fa-volcano"></i>
+                                </div>
+                                <div class="bookmark-info">
+                                    <h4>Великая пирамида</h4>
+                                    <div class="bookmark-coords">29.9792° N, 31.1342° E</div>
+                                </div>
+                                <button class="bookmark-action" title="Перейти">
+                                    <i class="fas fa-location-arrow"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <button class="btn-outline full-width" id="addBookmark">
+                            <i class="fas fa-plus"></i>
+                            Добавить закладку
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Quick Export -->
+                <section class="sidebar-section">
+                    <div class="section-header">
+                        <h3><i class="fas fa-share-alt"></i> ЭКСПОРТ</h3>
+                        <button class="section-toggle">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                    <div class="section-content">
+                        <div class="export-options">
+                            <button class="export-btn" data-format="png">
+                                <i class="fas fa-image"></i>
+                                <span>PNG</span>
+                            </button>
+                            <button class="export-btn" data-format="jpg">
+                                <i class="fas fa-file-image"></i>
+                                <span>JPEG</span>
+                            </button>
+                            <button class="export-btn" data-format="pdf">
+                                <i class="fas fa-file-pdf"></i>
+                                <span>PDF</span>
+                            </button>
+                            <button class="export-btn" data-format="geojson">
+                                <i class="fas fa-code"></i>
+                                <span>GeoJSON</span>
+                            </button>
+                            <button class="export-btn" data-format="kml">
+                                <i class="fas fa-globe"></i>
+                                <span>KML</span>
+                            </button>
+                            <button class="export-btn" data-format="gpx">
+                                <i class="fas fa-map-marked-alt"></i>
+                                <span>GPX</span>
+                            </button>
+                        </div>
+                        
+                        <div class="export-settings">
+                            <div class="setting-item">
+                                <label>
+                                    <input type="checkbox" id="includeLayers" checked>
+                                    <span>Включить слои</span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <label>
+                                    <input type="checkbox" id="includeMarkers" checked>
+                                    <span>Включить метки</span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <label>
+                                    <input type="checkbox" id="highQuality">
+                                    <span>Высокое качество</span>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <button class="btn-primary full-width" id="exportMap">
+                            <i class="fas fa-download"></i>
+                            Экспортировать карту
+                        </button>
+                    </div>
+                </section>
+            </aside>
+        </main>
+
+        <!-- Footer -->
+        <footer class="main-footer">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <div class="footer-logo">
+                        <i class="fas fa-satellite"></i>
+                        <span>NEO-SAT v3.0</span>
+                    </div>
+                    <div class="footer-info">
+                        <span>© 2024 NeoSpace Technologies</span>
+                        <span class="footer-divider">|</span>
+                        <span>Обновление данных: <span id="dataUpdate">сегодня</span></span>
+                    </div>
+                </div>
+                
+                <div class="footer-center">
+                    <div class="connection-info">
+                        <div class="connection-item">
+                            <i class="fas fa-satellite-dish"></i>
+                            <span>Задержка: <strong id="pingTime">42ms</strong></span>
+                        </div>
+                        <div class="connection-item">
+                            <i class="fas fa-database"></i>
+                            <span>Кэш: <strong id="cacheSize">1.2GB</strong></span>
+                        </div>
+                        <div class="connection-item">
+                            <i class="fas fa-wifi"></i>
+                            <span>Тайлов: <strong id="tilesLoaded">245</strong>/<strong id="tilesTotal">1024</strong></span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-right">
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">
+                            <i class="fas fa-satellite-dish"></i>
+                            <span>API</span>
+                        </a>
+                        <a href="#" class="footer-link">
+                            <i class="fas fa-book"></i>
+                            <span>Документация</span>
+                        </a>
+                        <a href="#" class="footer-link">
+                            <i class="fas fa-question-circle"></i>
+                            <span>Поддержка</span>
+                        </a>
+                        <a href="#" class="footer-link">
+                            <i class="fas fa-cog"></i>
+                            <span>Настройки</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal" id="satelliteModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-satellite"></i> Управление спутниками</h3>
+                <button class="modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Satellite management content -->
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="settingsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-cog"></i> Настройки системы</h3>
+                <button class="modal-close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <!-- Settings content -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Notifications -->
+    <div class="notification-container" id="notificationContainer">
+        <!-- Notifications will be added here -->
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.vectorgrid@latest/dist/Leaflet.VectorGrid.bundled.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet-rotatedmarker@0.2.0/leaflet.rotatedMarker.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@2.0.0/Control.FullScreen.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.locatecontrol@0.72.0/dist/L.Control.Locate.min.js" charset="utf-8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="map.js"></script>
+    <script src="jsapp.js"></script>
+    <script src="js/map-controler.js"></script>
+    <script src="js/satellite-tracker.js"></script>
+    <script src="js/weather-integration.js"></script>
+</body>
+</html>
